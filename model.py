@@ -297,6 +297,6 @@ if __name__ == '__main__':
             plt.subplot(2, 2, i+1)
             plt.imshow(test_imgs[i])
             plt.xticks([]), plt.yticks([])
-            plt.title('predict steering angle: {.5f}'.format(steer_angles[i][0]))
+            plt.title('predict steering angle: {:.5f}'.format(steer_angles[i][0]))
             plt.savefig('test.png')
 
