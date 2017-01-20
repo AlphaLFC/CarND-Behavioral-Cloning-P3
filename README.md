@@ -27,7 +27,7 @@ I adopted the `mse` loss and the `Adam` optimizer for the model. If firstly trai
 Some hyperparameters are as follows.
 
 ```python
-batch_size = 128  # It used about 2G GPU RAM
+batch_size = 128  # It used about 0.8G GPU RAM
 epoches = 30  # 
 start_lr = 0.001
 fine_tune_lr = 1e-4
