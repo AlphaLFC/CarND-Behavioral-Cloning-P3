@@ -17,6 +17,6 @@ I designed a resnet-like neural network. The architechture consists of three maj
 - The regression layers include 4 `Dense` layers. `Dropout` layers are added to prevent overfitting.
 
 I plotted the model architechture with layer shape shown using keras, as the figure below.
-![model.png](Model architechture)
+![Model architechture](model.png)
 
 ## Model training strategy
