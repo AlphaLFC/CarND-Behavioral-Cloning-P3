@@ -2,7 +2,7 @@
 
 ## Data preparation
 
-The car was trained in both tracks, and the training dataset consist of records of about several laps of normal, centerline driving and records of recovering from either left or right road side. Additionally, a testing dataset with only records of normal driving in the first track were created to evaluate the trained model. All datasets were recorded under the fantastic graphics quality.
+The car was trained in both tracks, and the training dataset consist of records of about several laps of normal, centerline driving and records of recovering from either left or right road side. Total number of training records is only about 8000. Additionally, a testing dataset with only records of normal driving in the first track were created to evaluate the trained model. All datasets were recorded under the fantastic graphics quality.
 
 A `data_generator` function was designed to generate batches of image arrays and labels from the \<csv log file\>. In model training process, the original training dataset were split into train/valid parts with a proportion of 0.8:0.2. And a simple data augmentation technique that **left-right flipping both images and steering angles** was adopted. Also, left, right and center camera images were all used in training. Thus, in training process, the `data_generator` will provide batches of left-right flipped and multi-camera image arrays and steering angles. While in evaluating the model on testing dataset, the `data_generator` will only provide center camera images without left-right flipping.
 
@@ -42,6 +42,6 @@ When training, the train_loss and val_loss both decreased with minor distances. 
 
 ## Model evaluatation and simulation tests
 
-The final model gives a loss of about 0.01 on the testing dataset. It's good enough to ensure safe driving in simulation tests, even using different graphics qualities, though sometimes the car just looks like drunk driving. I believe that behaviors of the car can be improved by better teaching. The model architechture is just good enough. Here I present some predictions of sample data.
+The final model gives a loss of about 0.01 on the testing dataset. It's good enough to ensure safe driving in simulation tests in both tracks, even using different graphics qualities, though sometimes the car just looks like drunk driving. I believe that behaviors of the car can be improved by better teaching. The model architechture is just good enough. And with data augmentation, the model learned to drive just great with only 6000 training records (exclude valid dataset). Here I present some predictions of sample data.
 
 ![predictions](test.png)
