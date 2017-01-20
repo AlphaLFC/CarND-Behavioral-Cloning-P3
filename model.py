@@ -272,7 +272,7 @@ class AutoSteeringWheel(RegressionNet):
 
 class Config:
     batch_size = 128
-    epoches = 30
+    epoches = 30  # 10 when fine tuning
     start_lr = 0.001  # default for Adam, just OK when learning from scrath
     fine_tune_lr = 1e-4
     l2_weight_decay = 1e-5
@@ -288,7 +288,7 @@ if __name__ == '__main__':
         K.set_session(sess)
         mywheel = AutoSteeringWheel(config)
         mywheel.show_model()
-        mywheel.train(fine_tune=False)
+        mywheel.train()
         mywheel.evaluate()
         test_imgs = np.array([mpimg.imread('test_imgs/'+str(i+1)+'.jpg') for i in range(4)])
         steer_angles = mywheel.predict(test_imgs)
