@@ -32,7 +32,7 @@ start_lr = 0.001
 fine_tune_lr = 1e-4
 l2_weight_decay = 1e-5
 ```
-In my previous trivals, I used a SGD optimizer when fine tuning the model, but the converging process didn't seem better than that of an Adam optimizer. Instead of fine tuning SGD learning rate when fint tuning the model, I just took Adam again with a lower starting learning rate.
+In my previous trivals, I used a SGD optimizer when fine tuning the model, but the converging process didn't seem better than that of an Adam optimizer. Instead of fine tuning SGD learning rate when fine tuning the model, I just took Adam again with a lower starting learning rate.
 
 When training, the train_loss and val_loss both decreased with minor distances. This means the model did learn without overfitting. And sometimes the val_loss was lower than train_loss in some epoches, probably because of no dropout operations during validation. One thing to note is that the final `mse` loss doesn't strictly indicate the perfomance of driving behavior. I took the provided sample data for training, the final loss was very small, but in simulating, the car sometimes go off the road, this may due to inadequte training data teaching the car how to go back road. Anyway, after some training and fine tuning, the loss on the testing dataset went to a small value. Below is a sample training log: ![training_log](log.png)
 
