@@ -2,7 +2,7 @@
 
 ## Data preparation
 
-The car was trained in both tracks, and the training dataset consist of records of about several laps of normal, centerline driving and records of recovering from either left or right road side. Additionally, a testing dataset with only records of normal driving in the first track were created to evaluate the trained model. 
+The car was trained in both tracks, and the training dataset consist of records of about several laps of normal, centerline driving and records of recovering from either left or right road side. Additionally, a testing dataset with only records of normal driving in the first track were created to evaluate the trained model. All datasets were recorded under the fantastic graphics quality.
 
 A `data_generator` function was designed to generate batches of image arrays and labels from the \<csv log file\>. In model training process, the original training dataset were split into train/valid parts with a proportion of 0.8:0.2. And a simple data augmentation technique that **left-right flipping both images and steering angles** was adopted. Also, left, right and center camera images were all used in training. Thus, in training process, the `data_generator` will provide batches of left-right flipped and multi-camera image arrays and steering angles. While in evaluating the model on testing dataset, the `data_generator` will only provide center camera images without left-right flipping.
 
@@ -19,6 +19,7 @@ I designed a resnet-like neural network. The architechture consists of three maj
 When using convolutional and fully connected layers, I adopted an activation method of `relu` to each of them and I also added a L2 weight decay to their weights to prevent overfitting. 
 
 I plotted the model architechture with layer shape shown using keras, as the figure below.
+
 ![Model architechture](model.png)
 
 ## Model training
@@ -35,8 +36,12 @@ l2_weight_decay = 1e-5
 ```
 In my previous trivals, I used a SGD optimizer when fine tuning the model, but the converging process didn't seem better than that of an Adam optimizer. Instead of fine tuning SGD learning rate when fine tuning the model, I just took Adam again with a lower starting learning rate.
 
-When training, the train_loss and val_loss both decreased with minor distances. This means the model did learn without overfitting. And sometimes the val_loss was lower than train_loss in some epoches, probably because of no dropout operations during validation. One thing to note is that the final `mse` loss doesn't strictly indicate the perfomance of driving behavior. I took the provided sample data for training, the final loss was very small, but in simulating, the car sometimes go off the road, this may due to inadequte training data teaching the car how to go back road. Anyway, after some training and fine tuning, the loss on the testing dataset went to a small value. Below is a sample training log: ![training_log](log.png)
+When training, the train_loss and val_loss both decreased with minor distances. This means the model did learn without overfitting. And sometimes the val_loss was lower than train_loss in some epoches, probably because of no dropout operations during validation. One thing to note is that the final `mse` loss doesn't strictly indicate the perfomance of driving behavior. I took the provided sample data for training, the final loss was very small, but in simulating, the car sometimes go off the road, this may due to inadequte training data teaching the car how to go back road. Anyway, after some training and fine tuning, the loss on the testing dataset went to a small value. Below are sample training logs: 
+
+![training_log0](log0.png) ![training_log1](log1.png) ![training_log2](log2.png)
 
 ## Model evaluatation and simulation tests
 
-The final model gives a loss of `???` on the testing dataset. It's good enough to ensure safe driving in simulation tests, though sometimes the car just looks like drunk driving. I believe that behaviors of the car can be improved by better teaching. The model architechture is just good enough. Here I present some predictions of sample data.
+The final model gives a loss of about 0.01 on the testing dataset. It's good enough to ensure safe driving in simulation tests, even using different graphics qualities, though sometimes the car just looks like drunk driving. I believe that behaviors of the car can be improved by better teaching. The model architechture is just good enough. Here I present some predictions of sample data.
+
+![predictions](test.png)
