@@ -14,9 +14,13 @@ I designed a resnet-like neural network. The architechture consists of three maj
 
 - The preprocessing layers include normalization and resizing operation. A `Lambda` layer was used to insert the normalization function. An `AveragePooling2D` layer was adapted to resize the camera image from shape (160, 320, 3) to (40, 80, 3).
 - The feature learning layers include 3 residual blocks (`res_block`) and a total of 12 `Convolution2D` layers. A `res_block` consists of two `Convolutional2D` layer. Each `Convolution2D` layer is followed by a `BatchNormalization` layer, for accelarating training process and regularizing. Detailed structure is shown in the figure below.
-- The regression layers include 4 `Dense` layers. `Dropout` layers are added to prevent overfitting.
+- The regression layers include 4 `Dense` layers. `Dropout` layers are added to prevent overfitting. This part is much like the structure in the Nvidia paper.
 
 I plotted the model architechture with layer shape shown using keras, as the figure below.
 ![Model architechture](model.png)
 
-## Model training strategy
+## Model training
+
+strategy
+
+## Model evaluatation and simulation tests
